@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Email Dashboard</title>
+    <meta http-equiv="refresh" content="60">
+
+    <style>
+        body {
+            margin: 0;
+            font-family: 'Segoe UI', sans-serif;
+            background: #f3f4f6;
+        }
+
+        .header {
+            background: linear-gradient(90deg, #1e3a8a, #2563eb);
+            color: white;
+            padding: 20px 40px;
+            font-size: 24px;
+            font-weight: bold;
+        }
+
+        .container {
+            width: 85%;
+            margin: 30px auto;
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 8px 20px rgba(0,0,0,0.08);
+            overflow: hidden;
+        }
+
+        .email-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 18px 25px;
+            border-bottom: 1px solid #e5e7eb;
+            transition: 0.2s;
+        }
+
+        .email-row:hover {
+            background: #f9fafb;
+        }
+
+        .left {
+            display: flex;
+            align-items: center;
+        }
+
+        .circle {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            margin-right: 15px;
+        }
+
+        .urgent { background: #ef4444; }
+        .promotion { background: #f59e0b; }
+        .normal { background: #10b981; }
+
+        .subject {
+            font-size: 16px;
+        }
+
+        .sender {
+            font-size: 13px;
+            color: #6b7280;
+        }
+
+        .time {
+            font-size: 13px;
+            color: #6b7280;
+        }
+
+        .unread .subject {
+            font-weight: bold;
+        }
+
+        a {
+            text-decoration: none;
+            color: inherit;
+            width: 100%;
+            display: flex;
+            justify-content: space-between;
+        }
+    </style>
+</head>
+<body>
+
+<div class="header">
+    📧 Smart Email Dashboard
+</div>
+
+<div class="container">
+
+{% for e in emails %}
+<div class="email-row {{ 'unread' if e.unread else '' }}">
+    <a href="/email/{{ e.id }}">
+        <div class="left">
+            <div class="circle {{ e.category }}"></div>
+            <div>
+                <div class="subject">{{ e.subject }}</div>
+                <div class="sender">{{ e.sender }}</div>
+            </div>
+        </div>
+        <div class="time">{{ e.time }}</div>
+    </a>
+</div>
+{% endfor %}
+
+</div>
+
+</body>
+</html>
